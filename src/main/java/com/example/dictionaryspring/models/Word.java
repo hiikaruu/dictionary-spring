@@ -1,5 +1,6 @@
 package com.example.dictionaryspring.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -17,5 +18,7 @@ public class Word {
     private String translation;
     private WordType valueWordType;
     private WordType translationWordType;
+    @Column(name = "dictionary_word")
+    private DictionaryType dictionaryWord;
 
 }

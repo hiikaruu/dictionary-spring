@@ -10,7 +10,8 @@ public class WordMapper {
                 word.getValue(),
                 word.getTranslation(),
                 word.getValueWordType(),
-                word.getTranslationWordType()
+                word.getTranslationWordType(),
+                word.getDictionaryWord()
         );
     }
     public static Word mapToWord(WordDto wordDto){
@@ -19,7 +20,8 @@ public class WordMapper {
                 wordDto.getValue(),
                 wordDto.getTranslation(),
                 wordDto.getValueWordType(),
-                wordDto.getTranslationWordType()
+                wordDto.getTranslationWordType(),
+                wordDto.getDictionaryWord()
         );
     }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Data
 @Entity
@@ -14,9 +15,10 @@ public class Dictionary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(name = "dictionary_type")
     private DictionaryType dictionaryType;
     @OneToMany()
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private HashMap<String,Word> words;
+    private List<Word> words;
 }

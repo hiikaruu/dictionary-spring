@@ -1,4 +1,7 @@
 package com.example.dictionaryspring.repositories;
 
-public class WordRepository {
+import com.example.dictionaryspring.models.Word;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface WordRepository extends JpaRepository<Word,Long> {
 }

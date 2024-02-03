@@ -7,6 +7,8 @@ import lombok.*;
 
 
 import java.util.HashMap;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,5 +16,5 @@ public class DictionaryDto {
     private Long id;
     private String name;
     private DictionaryType dictionaryType;
-    private HashMap<String, Word> words;
+    private List<Word> words;
 }
