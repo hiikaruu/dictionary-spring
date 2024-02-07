@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class DictionaryController {
     private DictionaryService dictionaryService;
-    @PostMapping
+    @PostMapping("/dicts")
     public ResponseEntity<DictionaryDto> createDictionary(@RequestBody DictionaryDto dictionaryDto){
         DictionaryDto savedDictionary = dictionaryService.createDictionary(dictionaryDto);
         return new  ResponseEntity<>(savedDictionary, HttpStatus.CREATED);
-
     }
 }

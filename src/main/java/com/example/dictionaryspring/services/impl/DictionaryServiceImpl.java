@@ -1,6 +1,7 @@
 package com.example.dictionaryspring.services.impl;
 
 import com.example.dictionaryspring.dto.DictionaryDto;
+import com.example.dictionaryspring.exceptions.DictionaryNotFoundException;
 import com.example.dictionaryspring.mapper.DictionaryMapper;
 import com.example.dictionaryspring.models.Dictionary;
 import com.example.dictionaryspring.repositories.DictionaryRepository;
@@ -16,5 +17,13 @@ public class DictionaryServiceImpl implements DictionaryService {
         Dictionary dictionary = DictionaryMapper.mapToDictionary(dictionaryDto);
         Dictionary savedDictionary = dictionaryRepository.save(dictionary);
         return DictionaryMapper.mapToDictionaryDto(savedDictionary);
+    }
+    @Override
+    public void getDictionaryById(Long dictionaryId){
+        Dictionary dictionary = dictionaryRepository.findById(dictionaryId)
+                .orElseThrow(() ->
+                        new DictionaryNotFoundException(dictionaryId.toString())
+                );
+        DictionaryMapper.mapToDictionaryDto(dictionary);
     }
 }

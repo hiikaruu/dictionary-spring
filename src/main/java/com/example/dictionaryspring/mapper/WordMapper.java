@@ -11,7 +11,7 @@ public class WordMapper {
                 word.getTranslation(),
                 word.getValueWordType(),
                 word.getTranslationWordType(),
-                word.getDictionaryWord()
+                word.getDictionaryId()
         );
     }
     public static Word mapToWord(WordDto wordDto){
@@ -21,7 +21,7 @@ public class WordMapper {
                 wordDto.getTranslation(),
                 wordDto.getValueWordType(),
                 wordDto.getTranslationWordType(),
-                wordDto.getDictionaryWord()
+                wordDto.getDictionaryId()
         );
     }
 }
