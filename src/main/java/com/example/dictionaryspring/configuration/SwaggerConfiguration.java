@@ -16,5 +16,4 @@ public class SwaggerConfiguration {
                                 .version("0.0.1")
                 );
     }
-
 }

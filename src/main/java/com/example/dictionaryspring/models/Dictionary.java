@@ -1,5 +1,6 @@
 package com.example.dictionaryspring.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,8 +18,13 @@ public class Dictionary {
     private String name;
     @Column(name = "dictionary_type")
     private DictionaryType dictionaryType;
-    @OneToMany()
+    @OneToMany(mappedBy = "dictionary", cascade = CascadeType.ALL, orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<Word> words;
+
+    public Dictionary(String name, DictionaryType dictionaryType) {
+        this.name = name;
+        this.dictionaryType = dictionaryType;
+    }
 }

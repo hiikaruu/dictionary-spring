@@ -1,8 +1,13 @@
 package com.example.dictionaryspring.services;
 
-import com.example.dictionaryspring.dto.DictionaryDto;
+import com.example.dictionaryspring.dto.CreateDictionaryDto;
+import com.example.dictionaryspring.dto.CreateWordDto;
+import com.example.dictionaryspring.dto.GetDictionaryDto;
+import com.example.dictionaryspring.models.DictionaryType;
 
 public interface DictionaryService {
-    DictionaryDto createDictionary(DictionaryDto dictionaryDto);
-    void getDictionaryById(Long dictionaryId);
+    GetDictionaryDto getDictionaryById(Long dictionaryId);
+    Long createDictionary(CreateDictionaryDto createDictionaryDto);
+    void deleteDictionaryById(Long dictionaryId);
+
 }

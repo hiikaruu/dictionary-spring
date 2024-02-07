@@ -1,29 +1,43 @@
 package com.example.dictionaryspring.services.impl;
 
-import com.example.dictionaryspring.dto.DictionaryDto;
+import com.example.dictionaryspring.dto.CreateDictionaryDto;
+import com.example.dictionaryspring.dto.GetDictionaryDto;
 import com.example.dictionaryspring.exceptions.DictionaryNotFoundException;
-import com.example.dictionaryspring.mapper.DictionaryMapper;
 import com.example.dictionaryspring.models.Dictionary;
 import com.example.dictionaryspring.repositories.DictionaryRepository;
 import com.example.dictionaryspring.services.DictionaryService;
+import com.example.dictionaryspring.validators.NotFoundedValidator;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
 @AllArgsConstructor
 public class DictionaryServiceImpl implements DictionaryService {
     private DictionaryRepository dictionaryRepository;
+    private final ModelMapper mapper;
+    private NotFoundedValidator notFoundedValidator;
+
     @Override
-    public DictionaryDto createDictionary(DictionaryDto dictionaryDto) {
-        Dictionary dictionary = DictionaryMapper.mapToDictionary(dictionaryDto);
-        Dictionary savedDictionary = dictionaryRepository.save(dictionary);
-        return DictionaryMapper.mapToDictionaryDto(savedDictionary);
+    public GetDictionaryDto getDictionaryById(Long dictionaryId){
+        return dictionaryRepository.findById(dictionaryId)
+                .map(d -> mapper.map(d, GetDictionaryDto.class))
+                .orElseThrow(() ->  new  DictionaryNotFoundException(dictionaryId.toString()));
     }
+
     @Override
-    public void getDictionaryById(Long dictionaryId){
-        Dictionary dictionary = dictionaryRepository.findById(dictionaryId)
-                .orElseThrow(() ->
-                        new DictionaryNotFoundException(dictionaryId.toString())
-                );
-        DictionaryMapper.mapToDictionaryDto(dictionary);
+    public Long createDictionary(CreateDictionaryDto createDictionaryDto) {
+        return dictionaryRepository.save(
+                new Dictionary(
+                        createDictionaryDto.getName(),
+                        createDictionaryDto.getDictionaryType())
+        ).getId();
+    }
+    @Transactional
+    @Override
+    public void deleteDictionaryById(Long dictionaryId) {
+        notFoundedValidator.dictionaryExists(dictionaryId);
+        dictionaryRepository.deleteDictionaryById(dictionaryId);
     }
 }
